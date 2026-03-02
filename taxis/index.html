@@ -2,9 +2,32 @@
 <html lang="es">
 
 <head>
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' 'unsafe-inline' https://maps.googleapis.com https://www.googletagmanager.com https://cdn.jsdelivr.net; 
+    style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; 
+    img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://cdn-icons-png.flaticon.com https://popnegro.github.io; 
+    font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; 
+    connect-src 'self' https://maps.googleapis.com https://www.google-analytics.com;
+    frame-src 'self' https://www.google.com;">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(self), camera=(), microphone=(), display-capture=()">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Más Taxis | Tu Unidad en Camino</title>
+    <title>Más Taxis Mendoza | Pedir Taxi con GPS en Maipú y Gran Mendoza</title>
+    <meta name="description"
+        content="Pedí tu taxi o remis en Mendoza de forma rápida. Ubicación GPS exacta, choferes profesionales y servicio 24hs en Maipú, Luján y Ciudad. ¡Viajá seguro!">
+    <meta name="keywords"
+        content="taxi mendoza, pedir taxi maipu, remis mendoza, taxi aeropuerto mendoza, transporte mendoza gps, pedir taxi por whatsapp mendoza">
+    <meta name="author" content="Tu Nombre/Agencia">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="AR-M">
+    <meta name="geo.placename" content="Mendoza">
+    <meta name="geo.position" content="-32.9815;-68.7890">
+    <meta name="ICBM" content="-32.9815, -68.7890">
+
+    <link rel="canonical" href="https://popnegro.github.io/tuwebhoy/taxis/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://popnegro.github.io/tuwebhoy/taxis/">
     <meta property="og:title" content="Más Taxis | Pedí tu unidad con GPS">
@@ -34,6 +57,37 @@
 
         gtag('config', 'G-RNGWR660DF');
     </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  "name": "Más Taxis Mendoza",
+  "description": "Servicio de taxis y remises con despacho por GPS en Mendoza.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Más Taxis",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Maipú",
+      "addressRegion": "Mendoza",
+      "addressCountry": "AR"
+    },
+    "telephone": "+5492613871088",
+    "priceRange": "$$"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Mendoza"
+  },
+  "serviceType": "Taxi y Remis",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "148"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -106,7 +160,7 @@
                             <input type="text" id="user-name" class="form-control form-control-lg border-0 shadow-sm"
                                 placeholder="Ej: Juan Pérez" aria-label="Nombre">
                         </div>
-                        <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)"
+                        <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)" rel="noopener noreferrer"
                             class="btn btn-whatsapp text-uppercase py-3 fw-bold pulse">
                             <i class="bi bi-whatsapp me-2"></i> Pedir por WhatsApp
                         </a>
@@ -176,34 +230,15 @@
     </main>
     <footer>
         <div class="container">
-            <div class="row g-4 px-4">
-                <div class="col-md-4 text-center text-md-start">
-                    <h6 class="mb-3">www.mastaxis.com.ar</h6>
-                    <p class="medium mb-2">Tu servicio de confianza en Mendoza. Rapidez, seguridad y
-                        confort en cada viaje, las 24 horas.</p>
-                    <p class="medium fw-bold var(--taxi-yellow)">Llámanos: <a href="tel:+5492613871088"
-                            class="text-white">
-                            +54 9 261 3871088 </a></p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <h6 class="mb-3">Servicios</h6>
-                    <ul class="list-unstyled small d-inline-block text-center text-md-start">
-                        <li>Viajes Locales</li>
-                        <li>Traslados al Aeropuerto</li>
-                        <li>Servicio Empresarial</li>
-                        <li>Reservas Programadas</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 text-center text-md-end">
-                    <h6 class="mb-3">Síguenos</h6>
-                    <div class="d-flex justify-content-center justify-content-md-end">
-                        <a href="#" class="social-icon bi bi-facebook" aria-label="Facebook"></a>
-                        <a href="#" class="social-icon bi bi-instagram" aria-label="Instagram"></a>
-                        <a href="#" class="social-icon bi bi-twitter-x" aria-label="Twitter X"></a>
-                    </div>
-                    <p class="medium mt-3">Escríbenos: <a href="mailto:info@mastaxis.com.ar">info@mastaxis.com.ar</a>
-                    </p>
-                </div>
+            <div class="col-md-4 text-center text-md-end">
+                <h6 class="mb-3 text-uppercase fw-bold">Síguenos</h6>
+                <div class="d-flex justify-content-center justify-content-md-end gap-3"><a href="#" class="social-icon bi bi-facebook" aria-label="Seguinos en Facebook"></a><a href="https://instagram.com/mastaxis" target="_blank"
+                        rel="noopener noreferrer" class="social-icon bi bi-instagram fs-4 text-white shadow-sm"
+                        aria-label="Instagram de Más Taxis"></a><a href="https://x.com/mastaxis" target="_blank"
+                        rel="noopener noreferrer" class="social-icon bi bi-twitter-x fs-4 text-white shadow-sm"
+                        aria-label="Twitter X de Más Taxis"></a></div>
+                <p class="medium mt-3">Escríbenos: <a href="mailto:info@mastaxis.com.ar"
+                        class="text-warning text-decoration-none">info@mastaxis.com.ar</a></p>
             </div>
 
             <div class="row footer-bottom text-center">
@@ -215,7 +250,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
@@ -226,7 +260,7 @@
                     </div>
 
                     <h3 class="fw-bold mb-3">¡Pedido Enviado!</h3>
-                    <p class="text-muted">El chofer ya recibió tu ubicación y nombre. Por favor, mantente atento a tu
+                    <p class="text-muted">Recibimos tu ubicación y nombre. Por favor, mantente atento a tu
                         WhatsApp por si necesita confirmar algún detalle.</p>
 
                     <div class="bg-light p-3 rounded-3 mb-4">
@@ -243,105 +277,105 @@
         </div>
     </div>
 
-   <script>
-    let map, marker, geocoder;
-    let userLatLng = "";
-    let userAddress = "mi ubicación actual";
-    const miTelefono = "5492613871088"; 
-    let timerInterval;
-    let startTime;
+    <script>
+        let map, marker, geocoder;
+        let userLatLng = "";
+        let userAddress = "mi ubicación actual";
+        const miTelefono = "5492613871088";
+        let timerInterval;
+        let startTime;
 
-    function initMap() {
-        const centroInicial = { lat: -32.9815, lng: -68.7890 };
-        map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 17,
-            center: centroInicial,
-            disableDefaultUI: true,
-            styles: [{ featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] }]
-        });
+        function initMap() {
+            const centroInicial = { lat: -32.9815, lng: -68.7890 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 17,
+                center: centroInicial,
+                disableDefaultUI: true,
+                styles: [{ featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] }]
+            });
 
-        const taxiIcon = {
-            url: "https://popnegro.github.io/tuwebhoy/taxis/pin-gps.png",
-            scaledSize: new google.maps.Size(40, 40),
-            anchor: new google.maps.Point(20, 40)
-        };
+            const taxiIcon = {
+                url: "https://popnegro.github.io/tuwebhoy/taxis/pin-gps.png",
+                scaledSize: new google.maps.Size(40, 40),
+                anchor: new google.maps.Point(20, 40)
+            };
 
-        marker = new google.maps.Marker({
-            map: map,
-            position: centroInicial,
-            animation: google.maps.Animation.DROP,
-            icon: taxiIcon
-        });
+            marker = new google.maps.Marker({
+                map: map,
+                position: centroInicial,
+                animation: google.maps.Animation.DROP,
+                icon: taxiIcon
+            });
 
-        geocoder = new google.maps.Geocoder();
-        obtenerUbicacion();
-    }
-
-    function actualizarCronometro() {
-        const diff = (Date.now() - startTime) / 1000;
-        const el = document.getElementById('timer-count');
-        if(el) el.innerText = diff.toFixed(1);
-    }
-
-    function obtenerUbicacion() {
-        const mapElement = document.getElementById('map');
-        mapElement.classList.add('loading');
-        
-        clearInterval(timerInterval);
-        startTime = Date.now();
-        document.getElementById('timer-container').classList.remove('d-none');
-        document.getElementById('ubicacion-status').innerText = "Localizando...";
-        timerInterval = setInterval(actualizarCronometro, 100);
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                clearInterval(timerInterval);
-                const pos = { lat: position.coords.latitude, lng: position.coords.longitude };
-
-                // CORRECCIÓN: URL válida para WhatsApp
-                userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
-
-                marker.setPosition(pos);
-                map.setCenter(pos);
-                mapElement.classList.remove('loading');
-
-                geocoder.geocode({ location: pos }, (results, status) => {
-                    if (status === "OK" && results[0]) {
-                        userAddress = results[0].formatted_address;
-                        document.getElementById('ubicacion-status').innerText = "Ubicación confirmada";
-                        
-                        // Sonido de éxito solo al confirmar
-                        new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3').play();
-                    }
-                });
-            }, () => {
-                clearInterval(timerInterval);
-                document.getElementById('ubicacion-status').innerText = "Error GPS. Activa tu ubicación.";
-            }, { enableHighAccuracy: true, timeout: 10000 });
-        }
-    }
-
-    function validarYEnviar(e) {
-        e.preventDefault(); // Prevenir el salto del enlace
-        const nameInput = document.getElementById('user-name').value.trim();
-
-        if (nameInput === "") {
-            alert("Por favor, ingresa tu nombre para el chofer.");
-            document.getElementById('user-name').focus();
-            return;
+            geocoder = new google.maps.Geocoder();
+            obtenerUbicacion();
         }
 
-        const textoBase = `🚕 *NUEVO PEDIDO DE TAXI*\n\n👤 *Pasajero:* ${nameInput}\n📍 *Ubicación:* ${userAddress}\n🗺️ *Mapa:* ${userLatLng}`;
-        const urlFinal = `https://wa.me/${miTelefono}?text=${encodeURIComponent(textoBase)}`;
-        
-        // Abrir WhatsApp
-        window.open(urlFinal, '_blank');
+        function actualizarCronometro() {
+            const diff = (Date.now() - startTime) / 1000;
+            const el = document.getElementById('timer-count');
+            if (el) el.innerText = diff.toFixed(1);
+        }
 
-        // Mostrar Modal de éxito
-        const modalExito = new bootstrap.Modal(document.getElementById('modalExito'));
-        modalExito.show();
-    }
-</script>
+        function obtenerUbicacion() {
+            const mapElement = document.getElementById('map');
+            mapElement.classList.add('loading');
+
+            clearInterval(timerInterval);
+            startTime = Date.now();
+            document.getElementById('timer-container').classList.remove('d-none');
+            document.getElementById('ubicacion-status').innerText = "Localizando...";
+            timerInterval = setInterval(actualizarCronometro, 100);
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    clearInterval(timerInterval);
+                    const pos = { lat: position.coords.latitude, lng: position.coords.longitude };
+
+                    // CORRECCIÓN: URL válida para WhatsApp
+                    userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
+
+                    marker.setPosition(pos);
+                    map.setCenter(pos);
+                    mapElement.classList.remove('loading');
+
+                    geocoder.geocode({ location: pos }, (results, status) => {
+                        if (status === "OK" && results[0]) {
+                            userAddress = results[0].formatted_address;
+                            document.getElementById('ubicacion-status').innerText = "Ubicación confirmada";
+
+                            // Sonido de éxito solo al confirmar
+                            new Audio('https://assets.mixkit.co/active_storage/sfx/719/719-preview.mp3').play();
+                        }
+                    });
+                }, () => {
+                    clearInterval(timerInterval);
+                    document.getElementById('ubicacion-status').innerText = "Error GPS. Activa tu ubicación.";
+                }, { enableHighAccuracy: true, timeout: 10000 });
+            }
+        }
+
+        function validarYEnviar(e) {
+            e.preventDefault(); // Prevenir el salto del enlace
+            const nameInput = document.getElementById('user-name').value.trim();
+
+            if (nameInput === "") {
+                alert("Por favor, ingresa tu nombre para pedir el taxi");
+                document.getElementById('user-name').focus();
+                return;
+            }
+
+            const textoBase = `🚕 *NUEVO PEDIDO DE TAXI*\n\n👤 *Pasajero:* ${nameInput}\n📍 *Ubicación:* ${userAddress}\n🗺️ *Mapa:* ${userLatLng}`;
+            const urlFinal = `https://wa.me/${miTelefono}?text=${encodeURIComponent(textoBase)}`;
+
+            // Abrir WhatsApp
+            window.open(urlFinal, '_blank');
+
+            // Mostrar Modal de éxito
+            const modalExito = new bootstrap.Modal(document.getElementById('modalExito'));
+            modalExito.show();
+        }
+    </script>
 
     <script>
         if ('serviceWorker' in navigator) {
@@ -352,7 +386,9 @@
     </script>
 
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&callback=initMap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 
