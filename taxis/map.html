@@ -1,77 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taxi Express | Tu Unidad con GPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Más Taxis | Tu Unidad en Camino</title>
     
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://maps.googleapis.com https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://cdn-icons-png.flaticon.com https://popnegro.github.io; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; connect-src 'self' https://maps.googleapis.com https://www.google-analytics.com;">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffc107">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3448/3448636.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     
     <style>
-        :root { --taxi-yellow: #ffc107; }
-        body { background-color: #f4f4f4; padding-top: 60px; }
-        .main-card { border-radius: 20px; border: none; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .btn-whatsapp { background-color: #25d366; color: white; border-radius: 50px; transition: all 0.3s; }
-        .btn-whatsapp:hover { background-color: #128c7e; color: white; transform: scale(1.02); }
+        :root { --taxi-yellow: #ffc107; --bg-gray: #f4f4f4; }
+        body { background-color: var(--bg-gray); font-family: 'Roboto', sans-serif; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
         
-        /* Animaciones */
-        .pulse { animation: pulse-animation 2s infinite; }
-        @keyframes pulse-animation { 
-            0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } 
+        /* Navbar y Header */
+        .navbar { background-color: #000 !important; }
+        .text-yellow { color: var(--taxi-yellow); }
+        
+        /* Carrusel con degradado inferior */
+        .carousel-inner { position: relative; }
+        .carousel-inner::after {
+            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to bottom, rgba(244, 244, 244, 0) 0%, rgba(244, 244, 244, 1) 100%);
+            pointer-events: none; z-index: 2;
         }
-        .taxi-float { animation: taxiFloat 2s ease-in-out infinite; display: inline-block; }
-        @keyframes taxiFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .carousel-item img { height: 220px; object-fit: cover; }
 
-        /* Estilos Temporizador y Input */
-        #timer-container { color: #0d6efd; font-weight: bold; font-variant-numeric: tabular-nums; }
-        #user-name { background-color: #f8f9fa; border-left: 5px solid var(--taxi-yellow) !important; }
-        #map.loading { background: #eee; opacity: 0.6; }
+        /* Tarjeta Principal */
+        .main-card { 
+            border-radius: 20px; border: none; padding: 20px; 
+            margin-top: -30px; z-index: 10; position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: white;
+        }
+
+        /* Mapa y Efecto Carga */
+        #map { height: 180px; width: 100%; border-radius: 12px; transition: opacity 0.3s; }
+        #map.loading { opacity: 0.5; background: #eee; }
+
+        /* Inputs y Botones */
+        .form-control { border-radius: 10px; padding: 12px; }
+        #user-name { border-left: 5px solid var(--taxi-yellow); background: #f9f9f9; }
+        .btn-whatsapp { 
+            background-color: #25d366; color: white; border-radius: 50px; 
+            padding: 15px; font-weight: bold; transition: all 0.3s; border: none;
+        }
+        .btn-whatsapp:hover { background-color: #128c7e; transform: scale(1.02); }
+
+        /* Autocompletado de Google */
+        .pac-container { border-radius: 10px; border: 1px solid var(--taxi-yellow); font-family: sans-serif; z-index: 9999 !important; }
+
+        /* Animación Pulse */
+        .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* Safe Area iPhone */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            footer { padding-bottom: calc(30px + env(safe-area-inset-bottom)); }
+        }
     </style>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="https://cdn-icons-png.flaticon.com/512/3448/3448636.png" width="30" class="me-2">
-                <span class="fw-bold text-uppercase">Taxi<span class="text-warning">Express</span></span>
-            </a>
-            <button class="btn btn-warning btn-sm fw-bold rounded-pill px-3">LLAMAR CENTRAL</button>
+
+    <nav class="navbar navbar-dark fixed-top shadow">
+        <div class="container justify-content-center">
+            <span class="navbar-brand fw-bold text-uppercase text-yellow italic" style="font-style: italic;">Más Taxis</span>
         </div>
     </nav>
 
-    <main class="container mt-4 mb-5">
+    <header id="taxiCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active"><img src="slide-01.webp" class="d-block w-100" alt="Taxi 1"></div>
+            <div class="carousel-item"><img src="slide-02.webp" class="d-block w-100" alt="Taxi 2"></div>
+        </div>
+    </header>
+
+    <main class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
-                <div class="card main-card bg-white">
-                    
-                    <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="card main-card">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
                         <small class="fw-bold text-muted">
                             <i class="bi bi-geo-alt-fill text-danger pulse"></i>
                             <span id="ubicacion-status">Localizando...</span>
                             <span id="timer-container" class="ms-1 d-none">(<span id="timer-count">0.0</span>s)</span>
                         </small>
-                        <button onclick="obtenerUbicacion()" class="btn btn-sm btn-light border">
+                        <button onclick="obtenerUbicacion()" class="btn btn-sm btn-light border-0 py-0">
                             <i class="bi bi-arrow-clockwise"></i> GPS
                         </button>
                     </div>
 
-                    <div id="map" style="height: 180px; width: 100%; border-radius: 15px;" class="mb-4 border shadow-sm"></div>
+                    <div id="manual-address-container" class="mb-3 d-none">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-warning"><i class="bi bi-search text-warning"></i></span>
+                            <input type="text" id="manual-address" class="form-control border-warning" placeholder="Escribe calle y número">
+                        </div>
+                    </div>
+
+                    <div id="map" class="shadow-sm mb-4"></div>
 
                     <div class="mb-4">
-                        <label class="form-label small fw-bold text-secondary">TU NOMBRE:</label>
-                        <input type="text" id="user-name" class="form-control form-control-lg shadow-sm" placeholder="¿A quién busca el chofer?">
+                        <label class="form-label small fw-bold text-secondary text-uppercase">Tu Nombre:</label>
+                        <input type="text" id="user-name" class="form-control" placeholder="Ej: Juan Pérez" rel="noopener">
                     </div>
 
                     <div class="d-grid">
-                        <button onclick="validarYEnviar(event)" class="btn btn-whatsapp py-3 fw-bold text-uppercase shadow pulse">
+                        <button onclick="validarYEnviar(event)" class="btn btn-whatsapp text-uppercase shadow pulse">
                             <i class="bi bi-whatsapp me-2"></i> Pedir Taxi Ahora
                         </button>
                     </div>
@@ -84,12 +123,10 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg text-center" style="border-radius: 25px;">
                 <div class="modal-body p-5">
-                    <div class="taxi-float mb-4">
-                        <i class="bi bi-taxi-front-fill text-warning display-1"></i>
-                    </div>
+                    <i class="bi bi-check-circle-fill text-success display-1 mb-4"></i>
                     <h3 class="fw-bold">¡Pedido Enviado!</h3>
-                    <p class="text-muted">El chofer recibió tu ubicación. Por favor, espera en la puerta.</p>
-                    <button class="btn btn-dark w-100 py-3 rounded-pill fw-bold" data-bs-dismiss="modal">ENTENDIDO</button>
+                    <p class="text-muted">El chofer recibió tu ubicación. Esperalo en la puerta.</p>
+                    <button class="btn btn-dark w-100 py-3 rounded-pill fw-bold" data-bs-dismiss="modal">LISTO</button>
                 </div>
             </div>
         </div>
@@ -97,10 +134,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let map, marker, geocoder;
+        let map, marker, geocoder, autocomplete;
         let userLatLng = "";
         let userAddress = "Buscando dirección...";
-        let timerInterval, startTime;
+        let startTime, timerInterval;
         const miTelefono = "5492613871088"; 
 
         function initMap() {
@@ -114,62 +151,74 @@
                 scaledSize: new google.maps.Size(40, 40)
             }});
             geocoder = new google.maps.Geocoder();
+            inicializarAutocompletado();
             obtenerUbicacion();
         }
 
-        function actualizarCronometro() {
-            const diff = (Date.now() - startTime) / 1000;
-            document.getElementById('timer-count').innerText = diff.toFixed(1);
-        }
-
         function obtenerUbicacion() {
+            const mapEl = document.getElementById('map');
+            const manualContainer = document.getElementById('manual-address-container');
+            mapEl.classList.add('loading');
+            
             clearInterval(timerInterval);
             startTime = Date.now();
             document.getElementById('timer-container').classList.remove('d-none');
-            document.getElementById('ubicacion-status').innerText = "Localizando...";
-            timerInterval = setInterval(actualizarCronometro, 100);
+            
+            timerInterval = setInterval(() => {
+                document.getElementById('timer-count').innerText = ((Date.now() - startTime) / 1000).toFixed(1);
+            }, 100);
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
                     clearInterval(timerInterval);
-                    const pos = { lat: position.coords.latitude, lng: position.coords.longitude };
-                    userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
-                    
-                    marker.setPosition(pos);
-                    map.setCenter(pos);
-
-                    geocoder.geocode({ location: pos }, (results, status) => {
-                        if (status === "OK" && results[0]) {
-                            userAddress = results[0].formatted_address;
+                    const p = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+                    userLatLng = `https://www.google.com/maps?q=${p.lat},${p.lng}`;
+                    map.setCenter(p); marker.setPosition(p);
+                    mapEl.classList.remove('loading');
+                    geocoder.geocode({ location: p }, (res, stat) => {
+                        if (stat === "OK" && res[0]) {
+                            userAddress = res[0].formatted_address;
                             document.getElementById('ubicacion-status').innerText = "Ubicación Confirmada";
                         }
                     });
-                }, () => {
+                },
+                () => {
                     clearInterval(timerInterval);
-                    alert("Error: Activa el GPS de tu celular.");
-                }, { enableHighAccuracy: true });
-            }
+                    document.getElementById('ubicacion-status').innerText = "GPS no detectado";
+                    manualContainer.classList.remove('d-none');
+                    mapEl.classList.add('loading');
+                },
+                { enableHighAccuracy: true, timeout: 15000 }
+            );
+        }
+
+        function inicializarAutocompletado() {
+            const input = document.getElementById('manual-address');
+            autocomplete = new google.maps.places.Autocomplete(input, {
+                componentRestrictions: { country: "ar" },
+                fields: ["geometry", "formatted_address"],
+                types: ["address"]
+            });
+            autocomplete.addListener("place_changed", () => {
+                const place = autocomplete.getPlace();
+                userAddress = place.formatted_address;
+                userLatLng = `https://www.google.com/maps?q=${place.geometry.location.lat()},${place.geometry.location.lng()}`;
+                document.getElementById('ubicacion-status').innerText = "Dirección Manual Lista";
+            });
         }
 
         function validarYEnviar(e) {
             const nombre = document.getElementById('user-name').value.trim();
-            if (!nombre) {
-                alert("Por favor, ingresa tu nombre.");
-                return;
-            }
-            const mensaje = `🚕 *NUEVO PEDIDO*\n👤 *Pasajero:* ${nombre}\n📍 *Dirección:* ${userAddress}\n🗺️ *Mapa:* ${userLatLng}`;
-            window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+            if (!nombre) { alert("Ingresá tu nombre"); return; }
             
-            setTimeout(() => {
-                new bootstrap.Modal(document.getElementById('modalExito')).show();
-            }, 500);
+            const msg = `🚕 *NUEVO PEDIDO*\n👤 *Pasajero:* ${nombre}\n📍 *Dirección:* ${userAddress}\n🗺️ *Mapa:* ${userLatLng}`;
+            window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+            
+            setTimeout(() => { new bootstrap.Modal(document.getElementById('modalExito')).show(); }, 800);
         }
 
-        // Registro de Service Worker para PWA
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
-        }
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places&callback=initMap"></script>
 </body>
 </html>

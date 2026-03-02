@@ -1,15 +1,23 @@
 {
-  "name": "Más Taxis Mendoza",
-  "short_name": "MásTaxis",
-  "start_url": "index.html",
+  "name": "TaxiPlus Mendoza",
+  "short_name": "TaxiPlus",
+  "description": "Pedí tu taxi con GPS en Mendoza de forma rápida y segura.",
+  "start_url": "https://popnegro.github.io/tuwebhoy/taxis/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffc107",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/3448/3448636.png",
+      "src": "mastaxis-icon.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "mastaxis-icon.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ]
 }

@@ -8,14 +8,13 @@
     style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; 
     img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://cdn-icons-png.flaticon.com https://popnegro.github.io; 
     font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; 
-    connect-src 'self' https://maps.googleapis.com https://www.google-analytics.com;
+    connect-src 'self' https://maps.gstatic.com https://maps.googleapis.com https://www.google-analytics.com https://cdn.jsdelivr.net;
     frame-src 'self' https://www.google.com;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(self), camera=(), microphone=(), display-capture=()">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Más Taxis Mendoza | Pedir Taxi con GPS en Maipú y Gran Mendoza</title>
+    <title>TaxiPlus Mendoza | Pedir Taxi con GPS en Las Heras, y Gran Mendoza</title>
     <meta name="description"
         content="Pedí tu taxi o remis en Mendoza de forma rápida. Ubicación GPS exacta, choferes profesionales y servicio 24hs en Maipú, Luján y Ciudad. ¡Viajá seguro!">
     <meta name="keywords"
@@ -80,7 +79,7 @@
     "@type": "City",
     "name": "Mendoza"
   },
-  "serviceType": "Taxi y Remis",  
+  "serviceType": "Taxi y Remis" 
 }
 </script>
 </head>
@@ -91,28 +90,22 @@
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="mastaxis-icon.webp" alt="Logo Taxi" class="me-1">
                 <span class="fw-bold text-uppercase text-yellow"
-                    style="letter-spacing: 1.5px; font-style: italic; font-size: x-large;">TAXIs</span>
+                    style="letter-spacing: 1px; font-style: italic; font-size: x-large;">TAXIPLUS</span>
             </a>
         </div>
     </nav>
     <header id="taxiCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="slide-01.webp" class="d-block w-100" alt="Taxi 2">
-                <div class="carousel-caption">
-                    <h2 class="fw-medium">Viajá sin Estrés</h2>
-                </div>
-            </div>
-            <div class="carousel-item">
                 <img src="slide-02.webp" class="d-block w-100" alt="Taxi 1">
                 <div class="carousel-caption">
-                    <h2 class="fw-medium">Viajá como Quieras</h2>
+                    <h2 class="fw-bold">Más cerca, más rápido</h2>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="taxi-gps.webp" class="d-block w-100" alt="Taxi 2">
                 <div class="carousel-caption">
-                    <h2 class="fw-medium">Llegá a tu Destino</h2>
+                    <h2 class="fw-bold">Tu taxi, geolocalizado</h2>
                 </div>
             </div>
         </div>
@@ -165,9 +158,9 @@
                             <input type="text" id="user-name" class="form-control form-control-lg border-0 shadow-sm"
                                 placeholder="Ej: Juan Pérez" aria-label="Nombre">
                         </div>
-                        <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)" rel="noopener noreferrer"
-                            class="btn btn-whatsapp text-uppercase py-3 fw-bold pulse">
-                            <i class="bi bi-whatsapp me-2"></i> Pedir por WhatsApp
+                        <a href="https://wa.me/5492613871088" id="btn-ws-dinamico" onclick="validarYEnviar(event)"
+                            rel="noopener noreferrer" class="btn btn-whatsapp text-uppercase py-3 fw-bold pulse">
+                            <i class="bi bi-whatsapp me-2"></i> Pedir Taxi Ahora
                         </a>
                     </div>
                     <div class="row mt-3 g-2 text-center small text-secondary">
@@ -324,97 +317,92 @@
             if (el) el.innerText = diff.toFixed(1);
         }
 
-        function actualizarDireccionManual() {
-            userAddress = document.getElementById('manual-address').value;
-            // Si es manual, el link de mapa será genérico de búsqueda por texto
-            userLatLng = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(userAddress)}`;
-        }
+      function actualizarDireccionManual() {
+    userAddress = document.getElementById('manual-address').value;
+    // Corregido: Agregado $ antes de la llave
+    userLatLng = `https://www.google.com/maps?q=${encodeURIComponent(userAddress)}`;
+}
 
-        function obtenerUbicacion() {
-            const statusText = document.getElementById('ubicacion-status');
-            const manualContainer = document.getElementById('manual-address-container');
-            const mapElement = document.getElementById('map');
+function obtenerUbicacion() {
+    const statusText = document.getElementById('ubicacion-status');
+    const manualContainer = document.getElementById('manual-address-container');
+    const mapElement = document.getElementById('map');
 
-            // Reset visual
-            manualContainer.classList.add('d-none');
-            mapElement.style.display = "block";
-            statusText.innerText = "Localizando...";
+    manualContainer.classList.add('d-none');
+    mapElement.style.display = "block";
+    statusText.innerText = "Localizando...";
 
+    clearInterval(timerInterval);
+    startTime = Date.now();
+    document.getElementById('timer-container').classList.remove('d-none');
+    timerInterval = setInterval(actualizarCronometro, 100);
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
             clearInterval(timerInterval);
-            startTime = Date.now();
-            document.getElementById('timer-container').classList.remove('d-none');
-            timerInterval = setInterval(actualizarCronometro, 100);
+            const pos = { lat: position.coords.latitude, lng: position.coords.longitude };
+            // Corregido: Sintaxis ${} para lat y lng
+            userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
 
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    clearInterval(timerInterval);
-                    const pos = { lat: position.coords.latitude, lng: position.coords.longitude };
-                    userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
+            marker.setPosition(pos);
+            map.setCenter(pos);
 
-                    marker.setPosition(pos);
-                    map.setCenter(pos);
-
-                    geocoder.geocode({ location: pos }, (results, status) => {
-                        if (status === "OK" && results[0]) {
-                            userAddress = results[0].formatted_address;
-                            statusText.innerHTML = 'Ubicación Lista';
-                        }
-                    });
-                },
-                (error) => {
-                    // SI FALLA EL GPS
-                    clearInterval(timerInterval);
-                    document.getElementById('timer-container').classList.add('d-none');
-                    statusText.innerText = "GPS no detectado";
-
-                    // Mostrar carga manual y ocultar mapa para limpiar la pantalla
-                    manualContainer.classList.remove('d-none');
-                    mapElement.style.display = "none";
-                    document.getElementById('manual-address').focus();
-                },
-                { enableHighAccuracy: true, timeout: 8000 }
-            );
-        }
-
-        // Modificación en validarYEnviar para contemplar ambos casos
-        function validarYEnviar(e) {
-            const nombre = document.getElementById('user-name').value.trim();
-            const direccionIngresada = document.getElementById('manual-address').value.trim();
-
-            // Si el contenedor manual está visible, validamos esa dirección
-            if (!document.getElementById('manual-address-container').classList.contains('d-none')) {
-                if (!direccionIngresada) {
-                    alert("Por favor, escribí tu dirección.");
-                    return;
+            geocoder.geocode({ location: pos }, (results, status) => {
+                if (status === "OK" && results[0]) {
+                    userAddress = results[0].formatted_address;
+                    document.getElementById('ubicacion-status').innerHTML = 'Ubicación Lista';
                 }
-                userAddress = direccionIngresada;
-                userLatLng = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(userAddress)}`;
-            }
+            });
+        },
+        (error) => {
+            clearInterval(timerInterval);
+            document.getElementById('timer-container').classList.add('d-none');
+            statusText.innerText = "GPS no detectado";
+            manualContainer.classList.remove('d-none');
+            mapElement.style.display = "none";
+            document.getElementById('manual-address').focus();
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+    );
+}
+function validarYEnviar(e) {
+    const nombre = document.getElementById('user-name').value.trim();
+    const direccionIngresada = document.getElementById('manual-address').value.trim();
 
-            if (!nombre) {
-                alert("Ingresá tu nombre para el chofer.");
-                return;
-            }
-
-            const texto = `🚕 *NUEVO PEDIDO*\n👤 *Pasajero:* ${nombre}\n📍 *Dirección:* ${userAddress}\n🗺️ *Mapa:* ${userLatLng}`;
-            window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(texto)}`, '_blank');
-
-            setTimeout(() => {
-                new bootstrap.Modal(document.getElementById('modalExito')).show();
-            }, 1000);
+    if (!document.getElementById('manual-address-container').classList.contains('d-none')) {
+        if (!direccionIngresada) {
+            alert("Por favor, escribí tu dirección.");
+            return;
         }
-    </script>
+        userAddress = direccionIngresada;
+        userLatLng = `https://www.google.com/maps?q=${encodeURIComponent(userAddress)}`;
+    }
 
-    <script>
-        if ('serviceWorker' in navigator) {
+    if (!nombre) {
+        alert("Ingresá tu nombre para el chofer.");
+        return;
+    }
+
+    const texto = `🚕 *NUEVO PEDIDO*\n👤 *Pasajero:* ${nombre}\n📍 *Dirección:* ${userAddress}\n🗺️ *Mapa:* ${userLatLng}`;
+    window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(texto)}`, '_blank');
+
+    setTimeout(() => {
+        const modalElement = document.getElementById('modalExito');
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    }, 1000);
+}
+         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
                 .then(reg => console.log('Service Worker registrado', reg))
                 .catch(err => console.warn('Error al registrar SW', err));
         }
+  
+       
     </script>
 
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&callback=initMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&libraries=places&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
