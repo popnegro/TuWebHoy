@@ -4,22 +4,18 @@
 <head>
     <link rel="preload" as="image" href="slide-02.webp" fetchpriority="high">
     <style>
-        .main-card {
-            min-height: 400px;
-        }
-    
-        #map {
-            height: 175px;
-            width: 100%;
-            background-color: #f8f9fa;
-        }
-    
-        /* Reserva espacio para el carrusel */
-        .carousel-item img {
-            aspect-ratio: 16 / 9;
-            background: #333;
-        }
-    </style>
+  /* CSS CRÍTICO: Dibuja la estructura base sin esperar descargas */
+  :root { --yellow: #ffc107; --dark: #212529; }
+  body { margin: 0; font-family: 'Roboto', sans-serif; background: #f4f4f4; color: var(--dark); }
+  .navbar { background: var(--dark); height: 56px; display: flex; align-items: center; padding: 0 1rem; position: fixed; width: 100%; top: 0; z-index: 1030; }
+  .navbar-brand { color: var(--yellow); font-weight: bold; text-decoration: none; display: flex; align-items: center; }
+  .main-card { background: #fff; border-radius: 15px; margin-top: 80px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); min-height: 450px; }
+  #map { height: 175px; background: #eee; border-radius: 12px; margin-bottom: 15px; }
+  .btn-whatsapp { background: #25d366; color: #fff; padding: 15px; border-radius: 10px; text-decoration: none; display: block; text-align: center; font-weight: bold; }
+  .carousel-item img { aspect-ratio: 16/9; background: #333; width: 100%; }
+  /* Esqueleto para evitar saltos (CLS) */
+  .skeleton { background: #e0e0e0; border-radius: 4px; }
+</style>
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self'; 
     media-src 'self' https://assets.mixkit.co;
@@ -52,10 +48,10 @@
     <meta property="og:description" content="Pedí tu taxi o remis en Mendoza de forma rápida. Ubicación GPS exacta, choferes profesionales y servicio 24hs. ¡Viajá seguro!">
     <meta property="og:image" content="https://popnegro.github.io/tuwebhoy/taxis/preview-image.jpg">
     <link rel="canonical" href="https://popnegro.github.io/tuwebhoy/taxis/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="theme.min.css" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffc107">
@@ -98,7 +94,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="taxigo-icon.webp" fetchpriority="high" width="52" height="52" alt="Logo TaxiGO" class="me-1">
+                <img src="taxigo-icon.webp" fetchpriority="high" width="512" height="512" alt="Logo TaxiGO" class="me-1">
                 <span class="fw-bold text-yellow animate__animated animate__fadeInLeft"
                     style="letter-spacing: 1px; font-style: italic; font-size: x-large;">TaxiGo</span>
             </a>
@@ -398,18 +394,15 @@
                 window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
             }
         }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
     </script>
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&libraries=places&callback=initMap"></script>
-    <script async defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-RNGWR660DF"></script>
-
-    <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
+        
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&libraries=places&callback=initMap" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-RNGWR660DF" defer></script>
+ 
 </body>
-
 </html>
