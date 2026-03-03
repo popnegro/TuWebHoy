@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self'; 
@@ -11,7 +12,14 @@
     connect-src 'self' https://maps.gstatic.com https://maps.googleapis.com https://www.google-analytics.com https://cdn.jsdelivr.net;
     frame-src 'self' https://www.google.com;">
 
-    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaxiGO Mendoza | Pedir Taxi con GPS</title>
 
@@ -19,25 +27,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="theme.min.css" rel="stylesheet">
-    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffc107">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TaxiService",
-      "name": "TaxiGO Mendoza",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "TaxiGO Mendoza",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": ["Las Heras", "Godoy Cruz", "Maipú"],
-          "addressRegion": "Mendoza",
-          "addressCountry": "AR"
-        },
-        "telephone": "+5492613871088"
-      }
-    }
-    </script>
+{
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  "name": "TaxiGO Mendoza",
+  "description": "Servicio de taxis y remises con despacho por GPS en todo Mendoza.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "TaxiGO Mendoza",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": [
+        "Capital", "Godoy Cruz", "Guaymallén", "Las Heras", "Luján de Cuyo", 
+        "Maipú", "Junín", "La Paz", "Lavalle", "Rivadavia", 
+        "Santa Rosa", "San Martín", "San Carlos", "Tunuyán", "Tupungato", 
+        "General Alvear", "Malargüe", "San Rafael"
+      ],
+      "addressRegion": "Mendoza",
+      "addressCountry": "AR"
+    },
+    "telephone": "+5492613871088",
+    "priceRange": "$$"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Provincia de Mendoza"
+  }
+}
+</script>
 </head>
 
 <body>
@@ -45,7 +68,8 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="mastaxis-icon.webp" alt="Logo Taxi" class="me-1">
-                <span class="fw-bold text-yellow animate__animated animate__fadeInLeft" style="letter-spacing: 1px; font-style: italic; font-size: x-large;">TaxiGo</span>
+                <span class="fw-bold text-yellow animate__animated animate__fadeInLeft"
+                    style="letter-spacing: 1px; font-style: italic; font-size: x-large;">TaxiGo</span>
             </a>
         </div>
     </nav>
@@ -70,7 +94,8 @@
                             <small class="fw-bold text-muted">
                                 <i class="bi bi-geo-alt-fill text-danger pulse"></i>
                                 <span id="ubicacion-status">Detectando ubicación...</span>
-                                <span id="timer-container" class="ms-1 d-none">(<span id="timer-count">0.0</span>s)</span>
+                                <span id="timer-container" class="ms-1 d-none">(<span
+                                        id="timer-count">0.0</span>s)</span>
                             </small>
                             <button onclick="obtenerUbicacion()" class="btn btn-sm btn-outline-primary border-0">
                                 <i class="bi bi-arrow-clockwise"></i> Reintentar
@@ -81,18 +106,23 @@
                             <div class="alert alert-warning py-2 mb-2">
                                 <i class="bi bi-exclamation-triangle-fill me-2"></i> Escribí tu dirección abajo:
                             </div>
-                            <input type="text" id="manual-address" class="form-control form-control-lg border-warning shadow-sm" placeholder="Ej: San Martín 123, Maipú" oninput="actualizarDireccionManual()">
+                            <input type="text" id="manual-address"
+                                class="form-control form-control-lg border-warning shadow-sm"
+                                placeholder="Ej: San Martín 123, Maipú" oninput="actualizarDireccionManual()">
                         </div>
 
-                        <div id="map" style="height: 175px; width: 100%; border-radius: 12px; border: 1px solid #eee;" class="shadow-sm mb-3"></div>
+                        <div id="map" style="height: 175px; width: 100%; border-radius: 12px; border: 1px solid #eee;"
+                            class="shadow-sm mb-3"></div>
                     </div>
 
                     <div class="d-grid gap-2">
                         <div class="mb-3">
                             <label for="user-name" class="form-label fw-medium text-muted">Nombre para el chofer</label>
-                            <input type="text" id="user-name" class="form-control form-control-lg border-0 shadow-sm" placeholder="Ej: Juan Pérez">
+                            <input type="text" id="user-name" class="form-control form-control-lg border-0 shadow-sm"
+                                placeholder="Ej: Juan Pérez">
                         </div>
-                        <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)" class="btn btn-whatsapp text-uppercase py-3 fw-bold animate__animated animate__pulse animate__infinite">
+                        <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)"
+                            class="btn btn-whatsapp text-uppercase py-3 fw-bold animate__animated animate__pulse animate__infinite">
                             <i class="bi bi-whatsapp me-2"></i> Pedir Taxi Ahora
                         </a>
                     </div>
@@ -104,11 +134,14 @@
                                 <h4 class="fw-bold mb-0 text-primary" id="eta-timer">Calculando...</h4>
                             </div>
                             <div class="text-end">
-                                <i class="bi bi-car-front-fill fs-1 text-warning animate__animated animate__sideInRight animate__infinite animate__slow"></i>
+                                <i
+                                    class="bi bi-car-front-fill fs-1 text-warning animate__animated animate__sideInRight animate__infinite animate__slow"></i>
                             </div>
                         </div>
                         <div class="progress mt-2" style="height: 6px;">
-                            <div id="eta-progress" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%"></div>
+                            <div id="eta-progress"
+                                class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                                role="progressbar" style="width: 100%"></div>
                         </div>
                     </div>
 
@@ -179,21 +212,25 @@
 
     <div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content animate__animated animate__zoomIn border-0 shadow-lg text-center" style="border-radius: 20px;">
+            <div class="modal-content animate__animated animate__zoomIn border-0 shadow-lg text-center"
+                style="border-radius: 20px;">
                 <div class="modal-body p-5">
-                    <i class="bi bi-shield-check-fill text-success display-1 animate__animated animate__tada animate__infinite"></i>
+                    <i
+                        class="bi bi-shield-check-fill text-success display-1 animate__animated animate__tada animate__infinite"></i>
                     <h3 class="fw-bold mt-3">¡Pedido Enviado!</h3>
                     <p class="text-muted">El chofer ya recibió tu ubicación.</p>
-                    <button onclick="compartirViajeSeguro()" class="btn btn-outline-success w-100 py-3 rounded-pill fw-bold mb-3">
+                    <button onclick="compartirViajeSeguro()"
+                        class="btn btn-outline-success w-100 py-3 rounded-pill fw-bold mb-3">
                         <i class="bi bi-share-fill me-2"></i> COMPARTIR VIAJE
                     </button>
-                    <button type="button" class="btn btn-dark w-100 py-3 rounded-pill fw-bold" data-bs-dismiss="modal">LISTO</button>
+                    <button type="button" class="btn btn-dark w-100 py-3 rounded-pill fw-bold"
+                        data-bs-dismiss="modal">LISTO</button>
                 </div>
             </div>
         </div>
     </div>
 
-     <footer>
+    <footer>
         <div class="container">
             <div class="col-md-12 text-center text-md-center">
                 <div class="d-flex justify-content-center justify-content-md-center gap-3"><a href="#"
@@ -268,7 +305,7 @@
                     userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
                     marker.setPosition(pos);
                     map.setCenter(pos);
-                    document.getElementById('beep-success').play().catch(() => {});
+                    document.getElementById('beep-success').play().catch(() => { });
                     geocoder.geocode({ location: pos }, (results, status) => {
                         if (status === "OK" && results[0]) {
                             userAddress = results[0].formatted_address;
@@ -331,9 +368,16 @@
             }
         }
     </script>
-    
- <script async defer
+
+    <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&libraries=places&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
 </body>
+
 </html>
