@@ -122,8 +122,8 @@
     <main class="container mb-5">
         <div class="row justify-content-center">
             <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
-                <div class="card main-card">
-                    <div class="mb-2 px-0">
+                <div class="card main-card animate__animated animate__fadeInUp">
+                        <div class="mb-2 px-0">
                         <div class="d-flex justify-content-between align-items-center mb-2 px-1">
                             <small class="fw-bold text-muted">
                                 <i class="bi bi-geo-alt-fill text-danger pulse"></i>
@@ -159,7 +159,7 @@
                                 placeholder="Ej: Juan Pérez" aria-label="Nombre">
                         </div>
                         <a href="https://wa.me/5492613871088" id="btn-ws-dinamico" onclick="validarYEnviar(event)"
-                            rel="noopener noreferrer" class="btn btn-whatsapp text-uppercase py-3 fw-bold pulse">
+                            rel="noopener noreferrer" class="btn btn-whatsapp text-uppercase py-3 fw-bold animate__animated animate__pulse animate__infinite pulse">
                             <i class="bi bi-whatsapp me-2"></i> Pedir Taxi Ahora
                         </a>
                     </div>
@@ -251,24 +251,13 @@
     </footer>
 
 
-    <div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg text-center" style="border-radius: 20px;">
+            <div class="modal-content animate__animated animate__zoomIn border-0 shadow-lg text-center" style="border-radius: 20px;">
                 <div class="modal-body p-5">
-                    <div class="taxi-animation mb-4">
-                        <i class="bi bi-taxi-front text-warning display-1 pulse-yellow"></i>
-                    </div>
-
+                    <i class="bi bi-taxi-front text-warning display-1 animate__animated animate__tada animate__infinite"></i>
                     <h3 class="fw-bold mb-3">¡Pedido Enviado!</h3>
-                    <p class="text-muted">Recibimos tu ubicación y nombre. Por favor, mantente atento a tu
-                        WhatsApp por si necesita confirmar algún detalle.</p>
-
-                    <div class="bg-light p-3 rounded-3 mb-4">
-                        <small class="d-block fw-bold text-uppercase text-primary mb-1">Recomendación:</small>
-                        <small class="text-secondary">Asegúrate de estar en la puerta o lugar indicado para agilizar la
-                            subida.</small>
-                    </div>
-
+                    <p class="text-muted">Recibimos tu ubicación. El chofer va en camino.</p>
                     <button type="button" class="btn btn-dark w-100 py-3 rounded-pill fw-bold" data-bs-dismiss="modal">
                         VOLVER AL MAPA
                     </button>
