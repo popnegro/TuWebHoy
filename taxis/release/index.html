@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGO Mendoza | Seguridad y Rapidez</title>
+    
+    <style>
+      :root { --yellow: #ffc107; --dark: #212529; --danger: #dc3545; --success: #25d366; }
+      body { margin: 0; font-family: 'Roboto', sans-serif; background: #f8f9fa; color: var(--dark); padding-top: 60px; }
+      .navbar { background: var(--dark); height: 56px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1030; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+      .navbar-brand { color: var(--yellow); font-weight: bold; text-decoration: none; display: flex; align-items: center; padding-left: 15px; }
+      .main-card { background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: none; }
+      #map { height: 200px; background: #eee; border-radius: 15px; margin-bottom: 15px; border: 1px solid #ddd; }
+      .btn-whatsapp { background: var(--success); color: #fff; padding: 15px; border-radius: 12px; text-decoration: none; display: block; text-align: center; font-weight: bold; border: none; width: 100%; transition: 0.3s; }
+      .btn-whatsapp:active { transform: scale(0.98); }
+      .bi-spin { display: inline-block; animation: spin 1s linear infinite; }
+      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      .price-box { background: #fff9e6; border: 1px dashed var(--yellow); border-radius: 12px; padding: 15px; }
+      #audio-status { font-size: 0.85rem; }
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="#">
+            <img src="taxigo-icon.webp" width="35" height="35" alt="Logo" class="me-2">
+            <span style="font-style: italic; letter-spacing: 1px;">TaxiGo Mendoza</span>
+        </a>
+    </nav>
+
+    <main class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card main-card animate__animated animate__fadeIn">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <small class="fw-bold text-muted">
+                            <i class="bi bi-geo-alt-fill text-danger"></i>
+                            <span id="ubicacion-status">Localizando...</span>
+                        </small>
+                        <button onclick="obtenerUbicacion()" class="btn btn-sm btn-light rounded-pill px-3">
+                            <i id="retry-icon" class="bi bi-arrow-clockwise"></i> Reintentar
+                        </button>
+                    </div>
+
+                    <div id="map"></div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-muted">A DONDE VAS?</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
+                            <input type="text" id="destination-input" class="form-control border-start-0" placeholder="Ej: Aeropuerto, Plaza Independencia...">
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-muted">TU NOMBRE</label>
+                            <input type="text" id="user-name" class="form-control" placeholder="Juan P.">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-bold text-muted">PAGO</label>
+                            <select id="metodo-pago" class="form-select" onchange="toggleCambio(this.value)">
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Mercado Pago">Mercado Pago</option>
+                                <option value="Tarjeta">Tarjeta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="cambio-container" class="mb-3">
+                        <input type="number" id="paga-con" class="form-control" placeholder="¿Con cuánto pagás?">
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label class="form-label small fw-bold text-muted">NOTAS O REFERENCIAS</label>
+                        <textarea id="observaciones" class="form-control" rows="2" placeholder="Portón azul, voy con mascota..."></textarea>
+                        <button type="button" id="btn-audio" class="btn btn-outline-danger btn-sm position-absolute" style="bottom: 8px; right: 8px; border-radius: 50%;">
+                            <i class="bi bi-mic-fill"></i>
+                        </button>
+                    </div>
+                    <div id="audio-status" class="text-danger mb-3 d-none animate__animated animate__pulse animate__infinite">
+                        <i class="bi bi-record-circle"></i> Grabando... <span id="audio-timer">0s</span>
+                    </div>
+
+                    <div class="price-box mb-3 d-none" id="price-container">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-muted">ESTIMADO:</span>
+                            <h3 class="fw-bold text-dark mb-0" id="estimated-price">$0,00</h3>
+                        </div>
+                    </div>
+
+                    <button onclick="validarYEnviar(event)" class="btn-whatsapp text-uppercase py-3">
+                        <i class="bi bi-whatsapp me-2"></i> Solicitar Taxi
+                    </button>
+
+                    <div id="sos-container" class="mt-4 d-none">
+                        <button onclick="activarSOS()" class="btn btn-danger w-100 py-3 shadow-sm fw-bold animate__animated animate__pulse animate__infinite">
+                            <i class="bi bi-shield-fill-exclamation me-2"></i> COMPARTIR VIAJE SOS
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4 border-0 shadow-lg" style="border-radius: 25px;">
+                <div class="display-1 text-success mb-3"><i class="bi bi-check-circle-fill"></i></div>
+                <h3 class="fw-bold">¡Pedido Enviado!</h3>
+                <p class="text-muted">No cierres esta web para seguir tu trayecto o usar el botón SOS.</p>
+                <button class="btn btn-dark w-100 py-3 rounded-pill" data-bs-dismiss="modal">ACEPTAR</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="beep-success" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places&callback=initMap" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+
+    <script>
+        let map, marker, geocoder, mediaRecorder;
+        let audioChunks = [];
+        let userLatLng = "", userAddress = "", destAddress = "";
+        const miTelefono = "5492613871088";
+
+        function initMap() {
+            const mza = { lat: -32.8895, lng: -68.8458 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15, center: mza, disableDefaultUI: true
+            });
+            marker = new google.maps.Marker({ map: map, position: mza, icon: 'https://maps.google.com/mapfiles/ms/icons/taxi.png' });
+            geocoder = new google.maps.Geocoder();
+            
+            obtenerUbicacion();
+            configurarBuscadorDestino();
+        }
+
+        function obtenerUbicacion() {
+            const icon = document.getElementById('retry-icon');
+            icon.classList.add('bi-spin');
+            
+            navigator.geolocation.getCurrentPosition((p) => {
+                icon.classList.remove('bi-spin');
+                const pos = { lat: p.coords.latitude, lng: p.coords.longitude };
+                userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
+                marker.setPosition(pos);
+                map.setCenter(pos);
+                geocoder.geocode({location: pos}, (r, s) => {
+                    if(s==='OK') {
+                        userAddress = r[0].formatted_address;
+                        document.getElementById('ubicacion-status').innerText = "Ubicación lista ✅";
+                    }
+                });
+            }, () => {
+                icon.classList.remove('bi-spin');
+                alert("Por favor activá el GPS.");
+            }, {enableHighAccuracy: true});
+        }
+
+        function configurarBuscadorDestino() {
+            const input = document.getElementById('destination-input');
+            const autocomplete = new google.maps.places.Autocomplete(input, { componentRestrictions: {country: 'ar'} });
+            
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                if(!place.geometry) return;
+                destAddress = place.formatted_address;
+                document.getElementById('price-container').classList.remove('d-none');
+                
+                // Calcular Precio
+                const o = marker.getPosition();
+                const d = place.geometry.location;
+                calcularPrecio(o.lat(), o.lng(), d.lat(), d.lng());
+                
+                // Ajustar Mapa
+                const bounds = new google.maps.LatLngBounds();
+                bounds.extend(o); bounds.extend(d);
+                map.fitBounds(bounds);
+            });
+        }
+
+        function calcularPrecio(lat1, lon1, lat2, lon2) {
+            const R = 6371; 
+            const dLat = (lat2-lat1)*Math.PI/180;
+            const dLon = (lon2-lon1)*Math.PI/180;
+            const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+            const dist = R * (2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a))) * 1.3; // +30% por calles
+            
+            const total = 950 + (dist * 550); // Tarifa Mendoza
+            document.getElementById('estimated-price').innerText = `$${Math.round(total).toLocaleString('es-AR')}`;
+        }
+
+        function toggleCambio(v) {
+            document.getElementById('cambio-container').classList.toggle('d-none', v !== 'Efectivo');
+        }
+
+        // AUDIO LOGIC
+        document.getElementById('btn-audio').addEventListener('click', async () => {
+            const status = document.getElementById('audio-status');
+            if(!mediaRecorder || mediaRecorder.state === "inactive") {
+                const s = await navigator.mediaDevices.getUserMedia({audio: true});
+                mediaRecorder = new MediaRecorder(s);
+                audioChunks = [];
+                mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                mediaRecorder.start();
+                status.classList.remove('d-none');
+                document.getElementById('btn-audio').classList.replace('btn-outline-danger', 'btn-danger');
+            } else {
+                mediaRecorder.stop();
+                status.classList.add('d-none');
+                document.getElementById('btn-audio').classList.replace('btn-danger', 'btn-outline-danger');
+                alert("Audio grabado. Avisaremos al chofer.");
+            }
+        });
+
+        function validarYEnviar(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('user-name').value;
+            if(!nombre) return alert("Ingresá tu nombre.");
+
+            const precio = document.getElementById('estimated-price').innerText;
+            const pago = document.getElementById('metodo-pago').value;
+            const pagaCon = document.getElementById('paga-con').value;
+            const obs = document.getElementById('observaciones').value;
+
+            let texto = `🚕 *NUEVO PEDIDO*\n👤 *Pasajero:* ${nombre}\n📍 *Origen:* ${userAddress}\n🏁 *Destino:* ${destAddress || 'A definir'}\n💰 *Precio Est.:* ${precio}\n💳 *Pago:* ${pago}${pagaCon ? ' (Paga con $'+pagaCon+')' : ''}`;
+            if(obs) texto += `\n📝 *Notas:* ${obs}`;
+            if(audioChunks.length > 0) texto += `\n🎙️ *Aviso:* El pasajero enviará un audio ahora.`;
+            texto += `\n🗺️ *Mapa:* ${userLatLng}`;
+
+            window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(texto)}`, '_blank');
+            document.getElementById('sos-container').classList.remove('d-none');
+            new bootstrap.Modal(document.getElementById('modalExito')).show();
+        }
+
+        function activarSOS() {
+            const msg = `🚨 *SOS SEGURIDAD*\nEstoy viajando en un TaxiGO hacia ${destAddress || 'mi destino'}. Seguí mi recorrido por favor.`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            alert("Ahora compartí tu 'Ubicación en Tiempo Real' en el chat que se abrió.");
+        }
+    </script>
+</body>
+</html>
