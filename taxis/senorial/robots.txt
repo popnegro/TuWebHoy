@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Indica dónde está el mapa del sitio
+Sitemap: https://popnegro.github.io/tuwebhoy/taxis/sitemap.xml

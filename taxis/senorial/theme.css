@@ -1,0 +1,210 @@
+body {
+    font-family: sans-serif;
+    background-color: #fff;
+}
+
+:root {
+    --taxi-yellow: #f7d117;
+    --taxi-black: #212529;
+    --whatsapp-green: #28a745;
+    --call-green: #28a745;
+}
+
+/* HEADER Y LOGO */
+.navbar-brand img {
+    height: 40px;
+    /* Ajusta el tamaño de tu logo aquí */
+    width: auto;
+}
+
+.navbar {
+    border-bottom: 3px solid var(--taxi-yellow);
+}
+
+/* Estilos del Carrusel */
+#taxiCarousel .carousel-item {
+    height: 50vh;
+    /* Altura en móviles */
+    min-height: 300px;
+}
+
+#taxiCarousel .carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    filter: brightness(0.6);
+    /* Oscurece para que resalte el texto */
+}
+
+.carousel-caption {
+    bottom: 30%;
+    margin: 0 auto;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Botonera Flotante */
+.main-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: -100px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.btn-action {
+    font-size: 1.2rem;
+    font-weight: 800;
+    border-radius: 12px;
+    padding: 15px;
+    text-transform: uppercase;
+    transition: transform 0.2s;
+    border: none;
+}
+
+.btn-action:active {
+    transform: scale(0.97);
+}
+
+.btn-call {
+    background-color: var(--call-green);
+    color: white;
+}
+
+.btn-call:hover {
+    background-color: #218838;
+    color: white;
+}
+
+.btn-whatsapp {
+    background-color: var(--whatsapp-green);
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebe57;
+    color: white;
+}
+
+/* Animación de pulso para el botón principal */
+.pulse {
+    animation: pulse-animation 1.5s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0px rgba(40, 167, 69, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 0 15px rgba(40, 167, 69, 0);
+    }
+}
+
+/* Contenedor del Mapa */
+.map-container {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 3px solid #eee;
+    margin-top: 20px;
+}
+
+#map {
+    height: 150px;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+}
+
+#timer-container {
+    color: #0d6efd;
+    font-variant-numeric: tabular-nums;
+    /* Evita que los números salten al cambiar */
+    font-weight: bold;
+}
+
+/* Estilo Reseñas Google */
+.review-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.google-logo {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.star-rating {
+    color: #fbbc05;
+    font-size: 0.9rem;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background-color: var(--taxi-black);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 40px 0 20px;
+}
+
+footer h6 {
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: var(--taxi-yellow);
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}
+
+.bi-facebook:hover {
+    color: #1877F2;
+}
+
+.bi-instagram:hover {
+    color: #E4405F;
+}
+
+.bi-twitter-x:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    margin-top: 30px;
+}
