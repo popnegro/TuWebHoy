@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Flash 24hs | Digitalizá tu Negocio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0061FF;
+            --accent: #ff3e3e;
+            --dark: #0f1115;
+            --card-bg: #ffffff;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f4f7fa; 
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* 1. BARRA DE URGENCIA (STICKY) */
+        .flash-bar {
+            background: var(--accent);
+            color: white;
+            padding: 12px 0;
+            font-weight: 800;
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 4px 10px rgba(255, 62, 62, 0.2);
+        }
+
+        /* 2. HERO SECTION */
+        .hero-section {
+            background: linear-gradient(135deg, #0061FF 0%, #003ba3 100%);
+            color: white;
+            padding: 100px 0 80px;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        /* 3. BENEFICIOS */
+        .benefit-card {
+            border: none;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .benefit-card:hover { transform: translateY(-5px); }
+
+        /* 4. PRICING CARDS (EL CORAZÓN DE LA VENTA) */
+        .pricing-card {
+            border: none;
+            border-radius: 24px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+        }
+        .pricing-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+        .pricing-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        /* 5. FLOATING ELEMENTS */
+        #social-proof {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            border-radius: 100px;
+            padding: 12px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .btn-wa {
+            background: #25d366;
+            color: white;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-wa:hover { background: #1eb956; color: white; transform: scale(1.05); }
+
+    /* Estilos para Benefit Items */
+    .benefit-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .benefit-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+    }
+    .bg-primary-subtle { background-color: rgba(0, 97, 255, 0.1); }
+    .bg-success-subtle { background-color: rgba(37, 211, 102, 0.1); }
+    .bg-info-subtle { background-color: rgba(13, 202, 240, 0.1); }
+
+    /* Estilos para el Accordion */
+    .accordion-button:not(.collapsed) {
+        background-color: #f0f5ff;
+        color: var(--primary);
+        box-shadow: none;
+    }
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: rgba(0,0,0,.125);
+    }
+
+    </style>
+</head>
+<body>
+
+    <div class="flash-bar text-center">
+        <div class="container d-flex justify-content-center align-items-center gap-3">
+            <span class="animate__animated animate__pulse animate__infinite">🔥 OFERTA EXCLUSIVA PARA NEGOCIOS LOCALES TERMINA EN:</span>
+            <div id="timer" class="badge bg-dark fs-6 font-monospace">00:00:00</div>
+        </div>
+    </div>
+
+    
+    <header class="hero-section text-center">
+        <div class="container">
+            <span class="badge bg-white text-primary px-3 py-2 rounded-pill fw-bold mb-3 animate__animated animate__fadeInDown">SOLO 2 CUPOS DISPONIBLES</span>
+            <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">Tu Web Profesional <br>Lista en <span class="text-info">48 Horas.</span></h1>
+            <p class="lead mb-5 opacity-75 animate__animated animate__fadeInUp">No pierdas más ventas por no tener presencia online. <br>Llevá tu local de Maipú a todo Mendoza con tecnología de alta conversión.</p>
+              <div class="d-flex gap-3">
+                    <a href="#contacto" class="btn btn-light btn-lg px-4 fw-bold py-3">EMPEZAR AHORA</a>
+                    <a href="#demo" class="btn btn-outline-light btn-lg px-4 py-3">VER DEMO EN VIVO</a>
+                </div>
+        
+        </div>
+      
+    </header>
+
+    <section class="container py-5 mt-n5">
+        <div class="row g-4">
+            <div class="col-md-4 animate__animated animate__fadeInLeft">
+                <div class="card benefit-card p-4 shadow-sm h-100">
+                    <i class="bi bi-lightning-charge-fill text-primary fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Velocidad de Carga</h5>
+                    <p class="text-muted small mb-0">Optimizamos tu sitio para que vuele en móviles 4G/5G, reduciendo el abandono de clientes.</p>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeInUp">
+                <div class="card benefit-card p-4 shadow-sm h-100">
+                    <i class="bi bi-whatsapp text-success fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Directo al WhatsApp</h5>
+                    <p class="text-muted small mb-0">Convertimos cada visita en un mensaje directo a tu celular para que cierres la venta.</p>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeInRight">
+                <div class="card benefit-card p-4 shadow-sm h-100">
+                    <i class="bi bi-shield-check text-info fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Gestión Autónoma</h5>
+                    <p class="text-muted small mb-0">Olvidate de pagar mantenimiento. Podés subir productos y cambiar precios vos mismo con un Excel.</p>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeInLeft">
+                <div class="card benefit-card p-4 shadow-sm h-100">
+                    <i class="bi bi-lightning-charge-fill text-primary fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Velocidad de Carga</h5>
+                    <p class="text-muted small mb-0">Optimizamos tu sitio para que vuele en móviles 4G/5G, reduciendo el abandono de clientes.</p>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeInUp">
+                <div class="card benefit-card p-4 shadow-sm h-100">
+                    <i class="bi bi-whatsapp text-success fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Directo al WhatsApp</h5>
+                    <p class="text-muted small mb-0">Convertimos cada visita en un mensaje directo a tu celular para que cierres la venta.</p>
+                </div>
+            </div>
+            <div class="col-md-4 animate__animated animate__fadeInRight">
+                <div class="card benefit-card p-4 shadow-sm h-100">
+                    <i class="bi bi-shield-check text-info fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Gestión Autónoma</h5>
+                    <p class="text-muted small mb-0">Olvidate de pagar mantenimiento. Podés subir productos y cambiar precios vos mismo con un Excel.</p>
+                </div>
+            </div>
+        </div>
+
+ 
+    </section>
+
+    <section class="container py-5" id="planes">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold h1">Planes con Descuento Flash</h2>
+            <p class="text-muted">Inversión única. Sin costos mensuales ocultos.</p>
+        </div>
+        <div class="row g-4 justify-content-center align-items-center">
+            <div class="col-md-5 col-lg-4">
+                <div class="card pricing-card p-4 shadow-sm">
+                    <div class="card-body text-center">
+                        <h4 class="fw-bold text-muted">Essential</h4>
+                        <div class="my-4">
+                            <span class="display-5 fw-bold">$180.000</span>
+                            <p class="text-muted small">Único pago</p>
+                        </div>
+                        <ul class="list-unstyled text-start mb-5">
+                            <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Landing Institucional</li>
+                            <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Botón WhatsApp</li>
+                            <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Optimización SEO Local</li>
+                        </ul>
+                        <button onclick="order('Essential')" class="btn btn-outline-primary w-100 py-3 fw-bold">SOLICITAR AHORA</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <div class="card pricing-card featured p-4 shadow-lg">
+                    <div class="card-body text-center">
+                        <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">EL MÁS VENDIDO</span>
+                        <h4 class="fw-bold">Pro Full Admin</h4>
+                        <div class="my-4">
+                            <span class="display-5 fw-bold text-primary">$350.000</span>
+                            <p class="text-muted small">Valor real: <del>$450.000</del></p>
+                        </div>
+                        <ul class="list-unstyled text-start mb-5">
+                            <li class="mb-2"><i class="bi bi-star-fill text-warning me-2"></i><b>Catálogo CSV (Excel)</b></li>
+                            <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Tracking de Pedidos</li>
+                            <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Panel Administrable</li>
+                        </ul>
+                        <button onclick="order('Pro Full')" class="btn btn-primary w-100 py-3 fw-bold shadow">RESERVAR MI CUPO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="social-proof" class="animate__animated">
+        <i class="bi bi-bag-check-fill text-success fs-4"></i>
+        <div>
+            <div class="fw-bold small" id="buyer-name">Pedro de Maipú</div>
+            <div class="text-muted small">Acaba de digitalizar su local</div>
+        </div>
+    </div>
+
+    
+    <section id="beneficios" class="container py-5">
+    <div class="text-center mb-5 animate__animated animate__fadeIn">
+        <h2 class="fw-bold h1">Tu negocio, <span class="text-primary">potenciado al máximo</span></h2>
+        <p class="text-muted lead">No hacemos solo webs, creamos herramientas de rentabilidad.</p>
+    </div>
+
+</section>
+
+<section id="faq" class="container py-5 my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="text-center fw-bold mb-5">Preguntas <span class="text-primary">Frecuentes</span></h2>
+            <div class="accordion accordion-flush shadow-sm rounded-4 overflow-hidden" id="accordionFAQ">
+                
+                <div class="accordion-item border-bottom">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            ¿Necesito conocimientos técnicos para usar el sistema CSV?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFAQ">
+                        <div class="accordion-body text-muted">
+                            Para nada. Si sabés usar Excel o Google Sheets, podés usar nuestro sistema. Solo completás las columnas de nombre, precio y stock, cargás el archivo y la web se actualiza al instante.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-bottom">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            ¿Qué pasa después de los 10 días de entrega?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                        <div class="accordion-body text-muted">
+                            Te brindamos una capacitación de 30 minutos para que aprendas a gestionar tu sitio. Además, tenés soporte técnico incluido por 30 días para cualquier duda que surja.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            ¿Incluye el dominio y el hosting?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                        <div class="accordion-body text-muted">
+                            En el pago único del desarrollo bonificamos el primer año de hosting. Te asesoramos paso a paso para que el dominio (.com o .com.ar) quede a tu nombre para siempre.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container text-center">
+            <h3 class="fw-bold mb-4">¿Dudas? Chateemos por WhatsApp</h3>
+            <a href="https://wa.me/5492613871088" class="btn btn-wa btn-lg px-5 py-3 shadow">
+                <i class="bi bi-whatsapp me-2"></i> CONSULTAR CON UN EXPERTO
+            </a>
+            <p class="mt-5 opacity-50 small">© 2026 Agencia Tech | Desarrollos de Alta Conversión | Mendoza, Argentina.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. COUNTDOWN TIMER (24HS)
+        const deadline = new Date();
+        deadline.setHours(deadline.getHours() + 24);
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = deadline - now;
+            if (diff <= 0) return;
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('timer').innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+        setInterval(updateTimer, 1000);
+
+        // 2. SOCIAL PROOF LOGIC
+        const buyers = ["Carlos de Ciudad", "Gabi de Luján", "Mati de Guaymallén", "Ana de Maipú"];
+        function showSocial() {
+            const el = document.getElementById('social-proof');
+            document.getElementById('buyer-name').innerText = buyers[Math.floor(Math.random()*buyers.length)];
+            el.style.display = 'flex';
+            el.classList.add('animate__fadeInLeft');
+            setTimeout(() => {
+                el.classList.replace('animate__fadeInLeft', 'animate__fadeOutLeft');
+                setTimeout(() => { el.style.display = 'none'; el.classList.remove('animate__fadeOutLeft'); }, 1000);
+            }, 4000);
+        }
+        setInterval(showSocial, 8000);
+
+        // 3. WHATSAPP LINK
+        function order(plan) {
+            const msg = `🚀 *OFERTA FLASH AGENCIA*\nHola! Quiero aprovechar el descuento para el *${plan}*.\n¿Podemos coordinar una reunión?`;
+            window.open(`https://wa.me/5492613871088?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
