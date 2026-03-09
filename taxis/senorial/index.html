@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaxiGO Mendoza | Pedir Taxi con GPS</title>
     <meta name="description" content="Pedí tu taxi o remis en Mendoza de forma rápida.">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -14,96 +15,134 @@
 </head>
 
 <body>
-   <header class="p-3 border-bottom bg-white sticky-top">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg p-0">
-            <a href="/" class="navbar-brand d-flex align-items-center link-body-emphasis text-decoration-none me-auto">
-                <i class="bi bi-taxi-front fs-2 me-2"></i> Señorial Remis
-            </a>
+    <header class="p-2 bg-white sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg p-0">
+                <a href="/"
+                    class="navbar-brand d-flex align-items-center link-body-emphasis text-decoration-none me-auto">
+                    <i class="bi bi-taxi-front fs-2 me-2"></i> Señorial Remis
+                </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="#" class="nav-link px-2 link-secondary">Solicitar viaje</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 link-body-emphasis">Reservar</a></li>
-                </ul>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a href="#ahora" class="nav-link px-2 link-secondary">Solicitar viaje</a></li>
+                        <li class="nav-item"><a href="#programado" class="nav-link px-2 link-body-emphasis">Reservar</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 link-body-emphasis">Cómo funciona</a></li>
 
-                <div class="text-lg-end text-center mt-2 mt-lg-0" id="user-auth-container">
-                    <button id="login-btn" class="btn btn-outline-dark rounded-pill" onclick="handleLogin()">
-                        <i class="bi bi-google me-2"></i> Iniciar Sesión
-                    </button>
+                    </ul>
+
+                    <div class="text-lg-end text-start mt-2 mt-lg-0" id="user-auth-container">
+                        <button id="login-btn" class="btn btn-outline-dark rounded-pill" onclick="handleLogin()">
+                            <i class="bi bi-google me-2"></i> Iniciar Sesión
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-</header>
+            </nav>
+        </div>
+    </header>
 
-    <section class="hero-full py-5">
+    <section class="hero-full px-2 py-5">
         <div class="container">
             <div class="row align-items-center g-5 py-5">
                 <div class="col-lg-6">
                     <div class="card p-4 shadow-lg rounded-4 border-0">
                         <ul class="nav nav-pills nav-justified mb-4" id="pills-tab" role="tablist">
-                            <li class="nav-item"><button class="nav-link active fw-bold" data-bs-toggle="pill" data-bs-target="#inmediato">Ahora</button></li>
-                            <li class="nav-item"><button class="nav-link fw-bold" data-bs-toggle="pill" data-bs-target="#programado">Programar</button></li>
+                            <li class="nav-item"><button class="nav-link active fw-bold" data-bs-toggle="pill"
+                                    data-bs-target="#inmediato">Ahora</button></li>
+                            <li class="nav-item"><button class="nav-link fw-bold" data-bs-toggle="pill"
+                                    data-bs-target="#programado">Programar</button></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="inmediato">
-                    <div class="mb-2 px-0">
-                        <div class="d-flex justify-content-between align-items-center mb-2 px-1">
-                            <small class="fw-bold text-muted">
-                                <i class="bi bi-geo-alt-fill text-danger pulse"></i>
-                                <span id="ubicacion-status">Detectando ubicación...</span>
-                                <span id="timer-container" class="ms-1 d-none">(<span
-                                        id="timer-count">0.0</span>s)</span>
-                            </small>
-                            <button onclick="obtenerUbicacion()" class="btn btn-sm btn-outline-primary border-0">
-                                <i class="bi bi-arrow-clockwise"></i> Reintentar
-                            </button>
-                        </div>
+                                <div class="mb-2 px-0">
+                                    <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+                                        <small class="fw-bold text-muted">
+                                            <i class="bi bi-geo-alt-fill text-danger pulse"></i>
+                                            <span id="ubicacion-status">Detectando ubicación...</span>
+                                            <span id="timer-container" class="ms-1 d-none">(<span
+                                                    id="timer-count">0.0</span>s)</span>
+                                        </small>
+                                        <button onclick="obtenerUbicacion()"
+                                            class="btn btn-sm btn-outline-primary border-0">
+                                            <i class="bi bi-arrow-clockwise"></i> Reintentar
+                                        </button>
+                                    </div>
 
-                        <div id="manual-address-container" class="mb-3 d-none animate__animated animate__shakeX">
-                            <div class="alert alert-warning py-2 mb-2">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                                GPS no disponible. Escribí tu dirección abajo:
+                                    <div id="manual-address-container"
+                                        class="mb-3 d-none animate__animated animate__shakeX">
+                                        <div class="alert alert-warning py-2 mb-2">
+                                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                            GPS no disponible. Escribí tu dirección abajo:
+                                        </div>
+                                        <input type="text" id="manual-address"
+                                            class="form-control border-warning shadow-sm"
+                                            placeholder="Ej: Calle San Martín 123, Maipú"
+                                            oninput="actualizarDireccionManual()">
+                                    </div>
+
+                                    <div id="map"
+                                        style="height: 175px; width: 100%; border-radius: 12px; border: 1px solid #eee;"
+                                        class="shadow-sm mb-3"></div>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <div class="">
+                                        <label for="user-name" class="form-label small text-muted fw-bold">Nombre para el
+                                            chofer</label>
+                                        <input type="text" id="user-name"
+                                            class="form-control form-control-lg border-0 shadow-sm"
+                                            placeholder="Ej: Juan Pérez">
+                                    </div>
+                                    <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)"
+                                        class="btn btn-whatsapp text-uppercase py-3 fw-bold animate__animated animate__pulse animate__infinite">
+                                        <i class="bi bi-whatsapp me-2"></i> Pedir Taxi Ahora
+                                    </a>
+                                </div>
+
+                                <div class="row mt-3 g-2 text-center small text-secondary">
+                                    <div class="col-4 border-end">
+                                        <i class="bi bi-clock-fill text-primary d-block fs-4 mb-1"></i> 15 min
+                                    </div>
+                                    <div class="col-4 border-end">
+                                        <i class="bi bi-shield-check text-success d-block fs-4 mb-1"></i> Viaje Seguro
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="bi bi-cash-stack text-warning d-block fs-4 mb-1"></i> Precio Justo
+                                    </div>
+                                </div>
                             </div>
-                            <input type="text" id="manual-address" class="form-control border-warning shadow-sm"
-                                placeholder="Ej: Calle San Martín 123, Maipú" oninput="actualizarDireccionManual()">
-                        </div>
-
-                        <div id="map" style="height: 175px; width: 100%; border-radius: 12px; border: 1px solid #eee;"
-                            class="shadow-sm mb-3"></div>
-                    </div>
-
-                    <div class="d-grid gap-2">
-                        <div class="mb-3">
-                            <label for="user-name" class="form-label fw-medium text-muted">Nombre para el chofer</label>
-                            <input type="text" id="user-name" class="form-control form-control-lg border-0 shadow-sm"
-                                placeholder="Ej: Juan Pérez">
-                        </div>
-                        <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)"
-                            class="btn btn-whatsapp text-uppercase py-3 fw-bold animate__animated animate__pulse animate__infinite">
-                            <i class="bi bi-whatsapp me-2"></i> Pedir Taxi Ahora
-                        </a>
-                    </div>
-
-                    <div class="row mt-3 g-2 text-center small text-secondary">
-                        <div class="col-4 border-end">
-                            <i class="bi bi-clock-fill text-primary d-block fs-4 mb-1"></i> 15 min
-                        </div>
-                        <div class="col-4 border-end">
-                            <i class="bi bi-shield-check text-success d-block fs-4 mb-1"></i> Viaje Seguro
-                        </div>
-                        <div class="col-4">
-                            <i class="bi bi-cash-stack text-warning d-block fs-4 mb-1"></i> Precio Justo
-                        </div>
-                    </div>
-                </div>
                             <div class="tab-pane fade" id="programado">
-                                <p class="text-center">Seleccione fecha y hora.</p>
+                                <form id="form-reserva" onsubmit="validarReserva(event)">
+                                    <div class="mb-3">
+                                        <label class="form-label small text-muted fw-bold">Origen</label>
+                                        <input type="text" id="reserva-origen" class="form-control"
+                                            placeholder="Dirección de salida" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label small text-muted fw-bold">Destino</label>
+                                        <input type="text" id="reserva-destino" class="form-control"
+                                            placeholder="Dirección de llegada" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label small text-muted fw-bold">Fecha</label>
+                                            <input type="date" id="reserva-fecha" class="form-control" required>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label class="form-label small text-muted fw-bold">Hora</label>
+                                            <input type="time" id="reserva-hora" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-whatsapp text-uppercase py-3 fw-bold animate__animated animate__pulse animate__infinite w-100">
+                                        <i class="bi bi-calendar-check me-2"></i> Confirmar Reserva
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -111,6 +150,7 @@
                 <div class="col-lg-6 text-white">
                     <h1 class="display-3 fw-bold mb-4">Tu viaje, a un toque de distancia.</h1>
                     <p class="lead">Servicio de remises premium con tecnología de punta.</p>
+                  
                 </div>
             </div>
         </div>
@@ -121,7 +161,8 @@
             <div class="modal-content text-center p-5 rounded-4 border-0 shadow-lg">
                 <i class="bi bi-shield-check-fill text-success display-1"></i>
                 <h3 class="fw-bold mt-3">¡Pedido Enviado!</h3>
-                <button type="button" class="btn btn-dark w-100 py-3 rounded-pill mt-3" data-bs-dismiss="modal">LISTO</button>
+                <button type="button" class="btn btn-dark w-100 py-3 rounded-pill mt-3"
+                    data-bs-dismiss="modal">LISTO</button>
             </div>
         </div>
     </div>
@@ -279,6 +320,29 @@
                     </ul>
                 </div>`;
         }
+        function validarReserva(e) {
+            e.preventDefault();
+
+            const origen = document.getElementById('reserva-origen').value;
+            const destino = document.getElementById('reserva-destino').value;
+            const fecha = document.getElementById('reserva-fecha').value;
+            const hora = document.getElementById('reserva-hora').value;
+            const nombre = document.getElementById('user-name').value || "Pasajero";
+
+            const mensaje = `📅 *RESERVA DE TAXI - TAXIGO*\n\n` +
+                `👤 *Nombre:* ${nombre}\n` +
+                `📍 *Origen:* ${origen}\n` +
+                `🏁 *Destino:* ${destino}\n` +
+                `🗓️ *Fecha:* ${fecha}\n` +
+                `🕒 *Hora:* ${hora}`;
+
+            // Abrir WhatsApp con la reserva
+            window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+        // Asegurar que la fecha mínima sea hoy
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('reserva-fecha').setAttribute('min', hoy);
     </script>
 </body>
+
 </html>
