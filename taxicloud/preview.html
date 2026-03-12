@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>App para Empresas de Taxis | Plataforma de Gestión</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+margin:0;
+color:#333;
+line-height:1.6;
+}
+
+.container{
+width:90%;
+max-width:1100px;
+margin:auto;
+}
+
+header{
+background:#111;
+color:white;
+padding:15px 0;
+}
+
+header .nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.btn{
+background:#ffcc00;
+color:#000;
+padding:12px 20px;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;
+}
+
+.hero{
+background:#f5f5f5;
+padding:80px 0;
+text-align:center;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:18px;
+max-width:700px;
+margin:auto;
+}
+
+.section{
+padding:60px 0;
+}
+
+.section-dark{
+background:#111;
+color:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:#f9f9f9;
+padding:25px;
+border-radius:8px;
+}
+
+.steps{
+text-align:center;
+}
+
+.steps div{
+padding:20px;
+}
+
+.cta{
+text-align:center;
+padding:70px 0;
+background:#ffcc00;
+}
+
+form{
+max-width:500px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+input{
+padding:12px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+padding:14px;
+background:#111;
+color:white;
+border:none;
+border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+color:white;
+padding:14px 18px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:30px 0;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+<div><strong>TuAppTaxi</strong></div>
+<a class="btn" href="#demo">Solicitar demo</a>
+</div>
+</header>
+
+
+<section class="hero">
+<div class="container">
+
+<h1>La App para Modernizar tu Empresa de Taxis</h1>
+
+<p>
+Recibe pedidos desde el celular, asigna viajes automáticamente
+y controla toda tu flota desde un solo panel.
+</p>
+
+<br>
+
+<a class="btn" href="#funciona">Ver cómo funciona</a>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+<h2>¿Qué está pasando hoy con las agencias de taxis?</h2>
+
+<div class="grid">
+
+<div class="card">
+Los clientes prefieren pedir el taxi desde el celular.
+</div>
+
+<div class="card">
+Las apps de transporte capturan cada vez más viajes.
+</div>
+
+<div class="card">
+Las centrales telefónicas se saturan.
+</div>
+
+<div class="card">
+Falta control sobre los viajes y conductores.
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section class="section section-dark" id="funciona">
+<div class="container steps">
+
+<h2>Cómo funciona la plataforma</h2>
+
+<div class="grid">
+
+<div>
+<h3>1. El pasajero solicita el taxi</h3>
+<p>Desde su celular en pocos segundos.</p>
+</div>
+
+<div>
+<h3>2. El sistema asigna el móvil</h3>
+<p>El taxi disponible más cercano recibe el viaje.</p>
+</div>
+
+<div>
+<h3>3. La empresa controla el servicio</h3>
+<p>Panel centralizado con todos los viajes.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+<h2>Beneficios para tu empresa</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Más viajes</h3>
+<p>Los pasajeros pueden pedir el taxi sin llamar.</p>
+</div>
+
+<div class="card">
+<h3>Menos trabajo en la central</h3>
+<p>Asignación automática de móviles.</p>
+</div>
+
+<div class="card">
+<h3>Control total</h3>
+<p>Historial y estadísticas de viajes.</p>
+</div>
+
+<div class="card">
+<h3>Imagen moderna</h3>
+<p>Tu empresa compite con apps de transporte.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+<h2>Panel de control para la empresa</h2>
+
+<p style="text-align:center;max-width:700px;margin:auto;">
+Visualiza taxis disponibles, viajes activos, historial de servicios
+y estadísticas de actividad desde un solo panel.
+</p>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+<h2>El sistema se adapta a tu empresa</h2>
+
+<div class="grid">
+
+<div class="card">✔ Tu marca</div>
+<div class="card">✔ Tu flota</div>
+<div class="card">✔ Tus conductores</div>
+<div class="card">✔ Tus tarifas</div>
+
+</div>
+
+</div>
+</section>
+
+
+<section class="cta" id="demo">
+
+<div class="container">
+
+<h2>¿Te gustaría tener esta plataforma en tu empresa?</h2>
+
+<p>
+Implementamos el sistema completo adaptado
+a tu agencia de taxis o remises.
+</p>
+
+<br>
+
+<a class="btn" href="#form">Solicitar demo personalizada</a>
+
+</div>
+
+</section>
+
+
+<section class="section" id="form">
+
+<div class="container">
+
+<h2 style="text-align:center;">Solicitar demo</h2>
+
+<form>
+
+<input type="text" placeholder="Nombre" required>
+
+<input type="text" placeholder="Empresa">
+
+<input type="text" placeholder="Ciudad">
+
+<input type="tel" placeholder="Teléfono">
+
+<input type="number" placeholder="Cantidad de móviles">
+
+<button type="submit">Solicitar información</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<a class="whatsapp" href="https://wa.me/5490000000000" target="_blank">
+WhatsApp
+</a>
+
+
+<footer>
+
+<p>
+© Plataforma para Empresas de Taxis
+</p>
+
+</footer>
+
+</body>
+</html>
