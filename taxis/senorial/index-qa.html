@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="preload" as="image" href="slide-02.webp" fetchpriority="high">
+    
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    media-src 'self' https://assets.mixkit.co;
+    script-src 'self' 'unsafe-inline' https://maps.gstatic.com https://maps.googleapis.com https://www.googletagmanager.com https://cdn.jsdelivr.net https://*.googleapis.com; 
+    style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
+    img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com https://cdn-icons-png.flaticon.com https://popnegro.github.io; 
+    font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; 
+    connect-src 'self' https://maps.gstatic.com https://maps.googleapis.com https://www.google-analytics.com https://region1.google-analytics.com https://cdn.jsdelivr.net;
+    frame-src 'self' https://www.google.com;">
+
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <meta http-equiv="Cache-Control" content="max-age=31536000">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxiGO Mendoza | Pedir Taxi con GPS</title>
+    <meta name="description"
+        content="Pedí tu taxi o remis en Mendoza de forma rápida. Ubicación GPS exacta, choferes profesionales y servicio 24hs. ¡Viajá seguro!">
+    <meta name="keywords"
+        content="taxi mendoza, pedir taxi maipu, remis mendoza, taxi aeropuerto mendoza, transporte mendoza gps, pedir taxi por whatsapp mendoza">
+    <meta name="author" content="TaxiGo Mendoza - Luis Grasso">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="AR-M">
+    <meta name="geo.placename" content="Mendoza">
+    <meta name="geo.position" content="-32.9815;-68.7890">
+    <meta name="ICBM" content="-32.9815, -68.7890">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://popnegro.github.io/tuwebhoy/taxis/">
+    <meta property="og:title" content="TaxiGO Mendoza | Pedir Taxi con GPS">
+    <meta property="og:description"
+        content="Pedí tu taxi o remis en Mendoza de forma rápida. Ubicación GPS exacta, choferes profesionales y servicio 24hs. ¡Viajá seguro!">
+    <meta property="og:image" content="https://popnegro.github.io/tuwebhoy/taxis/preview-image.jpg">
+    <link rel="canonical" href="https://popnegro.github.io/tuwebhoy/taxis/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" media="print"
+        onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print"
+        onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="theme.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffc107">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="taxigo-icon.webp">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  "name": "TaxiGO Mendoza",
+  "description": "Servicio de taxis y remises con despacho por GPS en todo Mendoza.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "TaxiGO Mendoza",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": [
+        "Capital", "Godoy Cruz", "Guaymallén", "Las Heras", "Luján de Cuyo", 
+        "Maipú", "Junín", "La Paz", "Lavalle", "Rivadavia", 
+        "Santa Rosa", "San Martín", "San Carlos", "Tunuyán", "Tupungato", 
+        "General Alvear", "Malargüe", "San Rafael"
+      ],
+      "addressRegion": "Mendoza",
+      "addressCountry": "AR"
+    },
+    "telephone": "+5492613871088",
+    "priceRange": "$$"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Provincia de Mendoza"
+  }
+}
+</script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="taxigo-icon.webp" width="512" height="512" alt="Logo TaxiGO" class="me-1">
+                <span class="fw-bold text-yellow animate__animated animate__fadeInLeft"
+                    style="letter-spacing: 1px; font-style: italic; font-size: x-large;">TaxiGo</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+             
+                <div class="col-lg-7">
+                    <h1 class="display-3 fw-bold mb-4">Tu viaje, a un toque de distancia.</h1>
+                    <p class="lead mb-4">Servicio de remises premium con la tecnología de punta para tu seguridad.</p>
+                    <div class="card bg-white text-dark p-3" style="max-width: 400px;">
+                        <img src="tu-imagen-servicio.jpg" class="card-img-top rounded" alt="Servicio Remis">
+                        <div class="card-body px-0">
+                            <h5 class="fw-bold">Calidad Certificada</h5>
+                            <p class="small text-muted">Unidades monitoreadas y choferes con licencia profesional.</p>
+                        </div>
+                    </div>
+
+                </div>   
+            </div>
+            <div class="col-md-5">
+                <div class="card main-card animate__animated animate__fadeInUp">
+                    <div class="mb-2 px-0">
+                        <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+                            <small class="fw-bold text-muted">
+                                <i class="bi bi-geo-alt-fill text-danger pulse"></i>
+                                <span id="ubicacion-status">Detectando ubicación...</span>
+                                <span id="timer-container" class="ms-1 d-none">(<span
+                                        id="timer-count">0.0</span>s)</span>
+                            </small>
+                            <button onclick="obtenerUbicacion()" class="btn btn-sm btn-outline-primary border-0">
+                                <i class="bi bi-arrow-clockwise"></i> Reintentar
+                            </button>
+                        </div>
+
+                        <div id="manual-address-container" class="mb-3 d-none animate__animated animate__shakeX">
+                            <div class="alert alert-warning py-2 mb-2">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i> Escribí tu dirección abajo:
+                            </div>
+                            <input type="text" id="manual-address"
+                                class="form-control form-control-lg border-warning shadow-sm"
+                                placeholder="Ej: San Martín 123, Maipú" oninput="actualizarDireccionManual()">
+                        </div>
+
+                        <div id="map" style="height: 175px; width: 100%; border-radius: 12px; border: 1px solid #eee;"
+                            class="shadow-sm mb-3 skeleton"></div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <div class="mb-3">
+                            <label for="user-name" class="form-label fw-medium text-muted">Nombre para el chofer</label>
+                            <input type="text" id="user-name" class="form-control form-control-lg border-0 shadow-sm"
+                                placeholder="Ej: Juan Pérez">
+                        </div>
+                        <a href="#" id="btn-ws-dinamico" onclick="validarYEnviar(event)"
+                            class="btn btn-whatsapp text-uppercase py-3 fw-bold animate__animated animate__pulse animate__infinite">
+                            <i class="bi bi-whatsapp me-2"></i> Pedir Taxi Ahora
+                        </a>
+                    </div>
+
+                    <div id="eta-container" class="mt-3 p-3 bg-light rounded-3 d-none animate__animated">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <span class="d-block small text-muted text-uppercase fw-bold">Llegada estimada</span>
+                                <h4 class="fw-bold mb-0 text-primary" id="eta-timer">Calculando...</h4>
+                            </div>
+                            <div class="text-end">
+                                <i
+                                    class="bi bi-car-front-fill fs-1 text-warning animate__animated animate__sideInRight animate__infinite animate__slow"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-2" style="height: 6px;">
+                            <div id="eta-progress"
+                                class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                                role="progressbar" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3 g-2 text-center small text-secondary">
+                        <div class="col-4 border-end">
+                            <i class="bi bi-clock-fill text-primary d-block fs-4 mb-1"></i> 15 min
+                        </div>
+                        <div class="col-4 border-end">
+                            <i class="bi bi-shield-check text-success d-block fs-4 mb-1"></i> Viaje Seguro
+                        </div>
+                        <div class="col-4">
+                            <i class="bi bi-cash-stack text-warning d-block fs-4 mb-1"></i> Precio Justo
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5 g-2 px-2 animate__animated animate__fadeInUp">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Opiniones de clientes</h5>
+                        <div class="text-end">
+                            <span class="fw-bold">4.9</span>
+                            <span class="star-rating"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="review-card shadow-lg">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-3"><img src="review-01.png" class="img-responsive" fetchpriority="low"
+                                    width="40" height="40" alt="avatar opinion"></div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-bold small">Juan Pérez </p>
+                                <span class="star-rating"><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <small class="text-muted">hace 2 días</small>
+                        </div>
+                        <p class="small text-muted mb-0">"Llegaron en 5 minutos al aeropuerto. El conductor fue muy
+                            amable y el auto estaba impecable. Muy recomendado."</p>
+                    </div>
+
+                    <div class="review-card shadow-lg">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-3"><img src="review-01.png" class="img-responsive" fetchpriority="low"
+                                    width="40" height="40" alt="avatar opinion"></div>
+                            <div class="flex-grow-1">
+                                <p class="mb-0 fw-bold small">Javier García </p>
+                                <span class="star-rating"><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+                            </div>
+                            <small class="text-muted">hace 1 semana</small>
+                        </div>
+                        <p class="small text-muted mb-0">"Servicio confiable y precio justo. Pedí por WhatsApp y la
+                            respuesta fue inmediata."</p>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a href="https://share.google/GCooYCxPtwu4wiGdL"
+                            class="text-decoration-none small fw-bold text-primary">Ver las 148 reseñas en Google
+                            Maps</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="modalExito" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content animate__animated animate__zoomIn border-0 shadow-lg text-center"
+                style="border-radius: 20px;">
+                <div class="modal-body p-5">
+                    <i
+                        class="bi bi-shield-check-fill text-success display-1 animate__animated animate__tada animate__infinite"></i>
+                    <h3 class="fw-bold mt-3">¡Pedido Enviado!</h3>
+                    <p class="text-muted">El chofer ya recibió tu ubicación.</p>
+                    <button onclick="compartirViajeSeguro()"
+                        class="btn btn-outline-success w-100 py-3 rounded-pill fw-bold mb-3">
+                        <i class="bi bi-share-fill me-2"></i> COMPARTIR VIAJE
+                    </button>
+                    <button type="button" class="btn btn-dark w-100 py-3 rounded-pill fw-bold"
+                        data-bs-dismiss="modal">LISTO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12 text-center text-md-center">
+                <div class="d-flex justify-content-center justify-content-md-center gap-3"><a href="#"
+                        class="social-icon bi bi-facebook" aria-label="Seguinos en Facebook"></a><a href="#"
+                        target="_blank" rel="noopener noreferrer"
+                        class="social-icon bi bi-instagram fs-4 text-white shadow-sm"
+                        aria-label="Instagram de TaxiGo"></a><a href="#" target="_blank" rel="noopener noreferrer"
+                        class="social-icon bi bi-twitter-x fs-4 text-white shadow-sm"
+                        aria-label="Twitter X de TaxiGo"></a></div>
+                <p class="medium mt-3">Escríbenos: <a href="mailto:grasso.luis@gmail.com"
+                        class="text-warning text-decoration-none">info@taxigo.com.ar</a></p>
+            </div>
+
+            <div class="row footer-bottom text-center">
+                <div class="col-12">
+                    <p class="small mb-0">© 2026 TaxiGO Mendoza <br>
+                        Diseño mobile para prueba comercial</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <audio id="beep-success" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"></audio>
+
+    <script>
+        let map, marker, geocoder;
+        let userLatLng = "";
+        let userAddress = "mi ubicación actual";
+        const miTelefono = "5492613871088";
+        let timerInterval, startTime;
+
+        function initMap() {
+            const mza = { lat: -32.9815, lng: -68.7890 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 17, center: mza, disableDefaultUI: true,
+                styles: [{ featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] }]
+            });
+            marker = new google.maps.Marker({ map: map, position: mza, animation: google.maps.Animation.DROP });
+            geocoder = new google.maps.Geocoder();
+            obtenerUbicacion();
+        }
+
+        function actualizarCronometro() {
+            const diff = (Date.now() - startTime) / 1000;
+            document.getElementById('timer-count').innerText = diff.toFixed(1);
+        }
+
+        // CORREGIDO: Sintaxis de template strings
+        function actualizarDireccionManual() {
+            userAddress = document.getElementById('manual-address').value;
+            userLatLng = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(userAddress)}`;
+        }
+
+        function obtenerUbicacion() {
+            const statusText = document.getElementById('ubicacion-status');
+            const manualContainer = document.getElementById('manual-address-container');
+            const mapElement = document.getElementById('map');
+            const timerContainer = document.getElementById('timer-container');
+            const btnRetry = document.querySelector('button[onclick="obtenerUbicacion()"] i');
+
+            // Feedback visual de carga
+            btnRetry.classList.add('bi-spin'); // Necesitas añadir CSS para esta rotación
+            manualContainer.classList.add('d-none');
+            mapElement.style.display = "block";
+            statusText.innerText = "Localizando...";
+
+            clearInterval(timerInterval);
+            startTime = Date.now();
+            timerContainer.classList.remove('d-none');
+            timerInterval = setInterval(actualizarCronometro, 100);
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    clearInterval(timerInterval);
+                    btnRetry.classList.remove('bi-spin');
+                    const pos = { lat: position.coords.latitude, lng: position.coords.longitude };
+
+                    // CORREGIDO: URL de Google Maps para coordenadas exactas
+                    userLatLng = `https://www.google.com/maps?q=${pos.lat},${pos.lng}`;
+
+                    marker.setPosition(pos);
+                    map.setCenter(pos);
+                    document.getElementById('beep-success').play().catch(() => { });
+
+                    geocoder.geocode({ location: pos }, (results, status) => {
+                        if (status === "OK" && results[0]) {
+                            userAddress = results[0].formatted_address;
+                            statusText.innerHTML = '<span class="text-success">Ubicación Lista</span>';
+                        }
+                    });
+                },
+                () => {
+                    clearInterval(timerInterval);
+                    btnRetry.classList.remove('bi-spin');
+                    timerContainer.classList.add('d-none');
+                    statusText.innerText = "GPS no detectado";
+                    manualContainer.classList.remove('d-none');
+                    mapElement.style.display = "none";
+                },
+                { enableHighAccuracy: true, timeout: 10000 } // Aumentado a 10s para mejor precisión
+            );
+        }
+
+        function iniciarContadorETA() {
+            const etaContainer = document.getElementById('eta-container');
+            const etaTimer = document.getElementById('eta-timer');
+            const etaProgress = document.getElementById('eta-progress');
+            etaContainer.classList.remove('d-none');
+
+            let tiempoRestante = 7 * 60;
+            const total = tiempoRestante;
+
+            const intervalo = setInterval(() => {
+                tiempoRestante--;
+                let m = Math.floor(tiempoRestante / 60);
+                let s = tiempoRestante % 60;
+                etaTimer.innerText = `${m}:${s < 10 ? '0' : ''}${s} min`;
+                etaProgress.style.width = `${(tiempoRestante / total) * 100}%`;
+                if (tiempoRestante <= 0) clearInterval(intervalo);
+            }, 1000);
+        }
+
+        function validarYEnviar(e) {
+            e.preventDefault();
+            const nombreInput = document.getElementById('user-name');
+            const nombre = nombreInput.value.trim();
+            const ahora = new Date();
+            const horaPedido = ahora.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+
+            if (!nombre) {
+                alert("Por favor, dinos tu nombre para que el chofer te identifique.");
+                nombreInput.focus();
+                return;
+            }
+
+            // Construcción del mensaje profesional
+            const texto = `🚕 *NUEVO PEDIDO - TAXIGO*\n\n👤 *Pasajero:* ${nombre}\n📍 *Dirección:* ${userAddress}\n🕒 *Hora:* ${horaPedido}\n🗺️ *Mapa:* ${userLatLng}`;
+
+            // Abrir WhatsApp
+            window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(texto)}`, '_blank');
+
+            // UI Feedback
+            iniciarContadorETA();
+            const modal = new bootstrap.Modal(document.getElementById('modalExito'));
+            modal.show();
+        }
+
+        function compartirViajeSeguro() {
+            const texto = `🛡️ *Viaje Seguro - TaxiGo*\n📍 Salida: ${userAddress}\n🗺️ Mapa: ${userLatLng}`;
+            if (navigator.share) {
+                navigator.share({ title: 'Mi Taxi', text: texto, url: window.location.href });
+            } else {
+                window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
+            }
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuFEjycWBUxeJ32jWckekiIutLgcul21Q&libraries=places&callback=initMap"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RNGWR660DF" defer></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RNGWR660DF');
+    </script>
+
+</body>
+
+</html>
